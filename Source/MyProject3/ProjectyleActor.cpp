@@ -16,7 +16,7 @@ AProjectyleActor::AProjectyleActor()
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
-	MeshComp->SetCollisionProfileName("NoCollision");
+	//MeshComp->SetCollisionProfileName("NoCollision");
 	static ConstructorHelpers::FObjectFinder<UStaticMesh>Mesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Cube.Shape_Cube'"));
 	if (Mesh.Succeeded()) {
 		MeshComp->SetStaticMesh(Mesh.Object);
@@ -26,13 +26,13 @@ AProjectyleActor::AProjectyleActor()
 	MeshComp->AttachTo(RootComponent);
 
 
-	Particle = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Particle"));
-	Particle->bAutoActivate = true;
-	static ConstructorHelpers::FObjectFinder<UParticleSystem>ParticleSystem(TEXT("ParticleSystem'/Game/StarterContent/Particles/P_Fire.P_Fire'"));
-	if (ParticleSystem.Succeeded()) {
-		Particle->SetTemplate(ParticleSystem.Object);
-	}
-	Particle->SetupAttachment(RootComponent);
+	//Particle = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("Particle"));
+	//Particle->bAutoActivate = true;
+	//static ConstructorHelpers::FObjectFinder<UParticleSystem>ParticleSystem(TEXT("ParticleSystem'/Game/StarterContent/Particles/P_Fire.P_Fire'"));
+	//if (ParticleSystem.Succeeded()) {
+	//	Particle->SetTemplate(ParticleSystem.Object);
+	//}
+	//Particle->SetupAttachment(RootComponent);
 	//Particle->ToggleActive();
 
 	ProjectileMovement = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovement"));

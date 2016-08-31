@@ -30,5 +30,8 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = Tick)
 		float RunningTime;
+
+	float ContadorDistancia = 0.0f;
+
 	
 };

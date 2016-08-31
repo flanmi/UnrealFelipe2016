@@ -32,6 +32,10 @@ public:
 	int GetContadorCubo();
 	void SeisCubos();
 
+
+	void SetContadorMoedinha(int NewContadorMoedinha);
+	int GetContadorMoedinha();
+	void DezMoedinhas();
 	
 
 private:
@@ -50,6 +54,9 @@ private:
 	UPROPERTY(EditAnywhere)
 		int ContadorCubo = 0;
 
+	UPROPERTY(EditAnywhere)
+		int ContadorMoedinha = 0;
+
 	void MoveForward(float Value);
 	void MoveRight(float Value);
 	void StartRun();
@@ -59,7 +66,7 @@ private:
 
 	void Turn(float Value);
 
-
+	
 
 	
 };

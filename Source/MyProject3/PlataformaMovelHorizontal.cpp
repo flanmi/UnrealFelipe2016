@@ -1,14 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "MyProject3.h"
-#include "ObstaculoCuboActor.h"
+#include "PlataformaMovelHorizontal.h"
 
 
 // Sets default values
-AObstaculoCuboActor::AObstaculoCuboActor()
+APlataformaMovelHorizontal::APlataformaMovelHorizontal()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
 
 	Root = CreateDefaultSubobject<UBoxComponent>(TEXT("Root"));
 	RootComponent = Root;
@@ -22,7 +23,7 @@ AObstaculoCuboActor::AObstaculoCuboActor()
 	}
 
 	MeshComp->SetWorldLocation(FVector(.0f, 0.0f, -30.0f));
-	MeshComp->SetWorldScale3D(FVector(0.6f, 0.6f, 0.6f));
+	MeshComp->SetWorldScale3D(FVector(3.0f, 2.0f, 1.0f));
 	MeshComp->AttachTo(RootComponent);
 
 
@@ -30,48 +31,25 @@ AObstaculoCuboActor::AObstaculoCuboActor()
 }
 
 // Called when the game starts or when spawned
-void AObstaculoCuboActor::BeginPlay()
+void APlataformaMovelHorizontal::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void AObstaculoCuboActor::Tick(float DeltaTime)
+void APlataformaMovelHorizontal::Tick( float DeltaTime )
 {
-	Super::Tick(DeltaTime);
+	Super::Tick( DeltaTime );
+
 
 	FVector LocalizacaoAtual = GetActorLocation();
 
-	float DeltaRange = 5.0f;
-
-		if (ContadorDistancia >= 0 && ContadorDistancia < 50) {
-
-			LocalizacaoAtual.X += DeltaRange;
-	
-		}
-		else if (ContadorDistancia >= 50 && ContadorDistancia < 100 ) {
-			LocalizacaoAtual.Y -= DeltaRange;
-			
-		}
-		else if (ContadorDistancia >= 100 && ContadorDistancia < 150) {
-			LocalizacaoAtual.X -= DeltaRange;
-
-		}
-		else if (ContadorDistancia >= 150 && ContadorDistancia < 200) {
-			LocalizacaoAtual.Y += DeltaRange;
-
-		}
-		else if (ContadorDistancia == 200){
-			ContadorDistancia = 0.0f;
-			
-		}
-		
-		ContadorDistancia++;
-
-		
+	float DeltaRange = (FMath::Sin(RunningTime + DeltaTime) - FMath::Sin(RunningTime));
+	LocalizacaoAtual.Y -= DeltaRange * 200.0f;
 	RunningTime += DeltaTime;
-	
+
+
 	SetActorLocation(LocalizacaoAtual);
 
 

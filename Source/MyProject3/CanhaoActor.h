@@ -3,16 +3,16 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "ProjectyleActor.generated.h"
+#include "CanhaoActor.generated.h"
 
 UCLASS()
-class MYPROJECT3_API AProjectyleActor : public AActor
+class MYPROJECT3_API ACanhaoActor : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AProjectyleActor();
+	ACanhaoActor();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -20,18 +20,17 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	
-	
+
 private:
 
 	UBoxComponent* Root;
 	UStaticMeshComponent* MeshComp;
-	//UParticleSystemComponent* Particle;
-	UProjectileMovementComponent* ProjectileMovement;
 
 
-	float DefaultZ;
+	void DropProjectile();
+
+	float ContadorTiro = 0.0f;
 
 
-
+	
 };

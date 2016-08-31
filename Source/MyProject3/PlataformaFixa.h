@@ -3,16 +3,16 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "ProjectyleActor.generated.h"
+#include "PlataformaFixa.generated.h"
 
 UCLASS()
-class MYPROJECT3_API AProjectyleActor : public AActor
+class MYPROJECT3_API APlataformaFixa : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AProjectyleActor();
+	APlataformaFixa();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -21,17 +21,9 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
 	
-	
 private:
 
 	UBoxComponent* Root;
 	UStaticMeshComponent* MeshComp;
-	//UParticleSystemComponent* Particle;
-	UProjectileMovementComponent* ProjectileMovement;
-
-
-	float DefaultZ;
-
-
-
+	
 };

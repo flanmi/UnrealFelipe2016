@@ -1,11 +1,11 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "MyProject3.h"
-#include "ObstaculoCuboActor.h"
+#include "ObstaculoCuboLActor.h"
 
 
 // Sets default values
-AObstaculoCuboActor::AObstaculoCuboActor()
+AObstaculoCuboLActor::AObstaculoCuboLActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
@@ -26,53 +26,54 @@ AObstaculoCuboActor::AObstaculoCuboActor()
 	MeshComp->AttachTo(RootComponent);
 
 
-
 }
 
 // Called when the game starts or when spawned
-void AObstaculoCuboActor::BeginPlay()
+void AObstaculoCuboLActor::BeginPlay()
 {
 	Super::BeginPlay();
 	
 }
 
 // Called every frame
-void AObstaculoCuboActor::Tick(float DeltaTime)
+void AObstaculoCuboLActor::Tick( float DeltaTime )
 {
-	Super::Tick(DeltaTime);
-
+	Super::Tick( DeltaTime );
+	
 	FVector LocalizacaoAtual = GetActorLocation();
 
-	float DeltaRange = 5.0f;
+	float DeltaRange = 6.0f;
 
-		if (ContadorDistancia >= 0 && ContadorDistancia < 50) {
+	if (ContadorDistancia >= 0 && ContadorDistancia < 50) {
 
-			LocalizacaoAtual.X += DeltaRange;
-	
-		}
-		else if (ContadorDistancia >= 50 && ContadorDistancia < 100 ) {
-			LocalizacaoAtual.Y -= DeltaRange;
-			
-		}
-		else if (ContadorDistancia >= 100 && ContadorDistancia < 150) {
-			LocalizacaoAtual.X -= DeltaRange;
+		LocalizacaoAtual.Y -= DeltaRange;
 
-		}
-		else if (ContadorDistancia >= 150 && ContadorDistancia < 200) {
-			LocalizacaoAtual.Y += DeltaRange;
+	}
+	else if (ContadorDistancia >= 50 && ContadorDistancia < 100) {
+		LocalizacaoAtual.X += DeltaRange;
 
-		}
-		else if (ContadorDistancia == 200){
-			ContadorDistancia = 0.0f;
-			
-		}
-		
-		ContadorDistancia++;
+	}
+	else if (ContadorDistancia >= 100 && ContadorDistancia < 150) {
+		LocalizacaoAtual.X -= DeltaRange;
 
-		
+	}
+	else if (ContadorDistancia >= 150 && ContadorDistancia < 200) {
+		LocalizacaoAtual.Y += DeltaRange;
+
+	}
+	else if (ContadorDistancia == 200) {
+		ContadorDistancia = 0.0f;
+
+	}
+
+	ContadorDistancia++;
+
+
 	RunningTime += DeltaTime;
-	
+
 	SetActorLocation(LocalizacaoAtual);
+
+
 
 
 

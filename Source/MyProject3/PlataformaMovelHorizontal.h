@@ -3,16 +3,16 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "ProjectyleActor.generated.h"
+#include "PlataformaMovelHorizontal.generated.h"
 
 UCLASS()
-class MYPROJECT3_API AProjectyleActor : public AActor
+class MYPROJECT3_API APlataformaMovelHorizontal : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AProjectyleActor();
+	APlataformaMovelHorizontal();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -20,18 +20,21 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	
-	
+
+
+
 private:
+
+
 
 	UBoxComponent* Root;
 	UStaticMeshComponent* MeshComp;
-	//UParticleSystemComponent* Particle;
-	UProjectileMovementComponent* ProjectileMovement;
 
 
-	float DefaultZ;
+	UPROPERTY(VisibleAnywhere, Category = Tick)
+		float RunningTime;
 
 
-
+	
+	
 };

@@ -12,8 +12,8 @@ UCLASS()
 class MYPROJECT3_API AMyProject3GameMode : public AGameMode
 {
 	GENERATED_BODY()
-	
-	
+
+		AMyProject3GameMode();
 	
 	
 };

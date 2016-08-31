@@ -3,16 +3,16 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "ProjectyleActor.generated.h"
+#include "ObstaculoBolaActor2.generated.h"
 
 UCLASS()
-class MYPROJECT3_API AProjectyleActor : public AActor
+class MYPROJECT3_API AObstaculoBolaActor2 : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AProjectyleActor();
+	AObstaculoBolaActor2();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -20,18 +20,17 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
-	
-	
 private:
 
-	UBoxComponent* Root;
+	USphereComponent* Root;
 	UStaticMeshComponent* MeshComp;
-	//UParticleSystemComponent* Particle;
-	UProjectileMovementComponent* ProjectileMovement;
 
 
-	float DefaultZ;
+	UPROPERTY(VisibleAnywhere, Category = Tick)
+		float RunningTime;
 
 
 
 };
+	
+

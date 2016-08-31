@@ -122,6 +122,20 @@ void AMyCharacter::SeisCubos() {
 
 }
 
+void AMyCharacter::SetContadorMoedinha(int NewContadorMoedinha) {
+	ContadorMoedinha = NewContadorMoedinha;
+}
+int AMyCharacter::GetContadorMoedinha() {
+	return ContadorMoedinha;
+}
+
+void AMyCharacter::DezMoedinhas() {
+	if (ContadorMoedinha == 10) {
+		UE_LOG(LogTemp, Warning, TEXT("Boss Disponivel"));
+	}
+}
+
+
 void AMyCharacter::DropProjectile() {
 	FActorSpawnParameters SpawnParameters;
 	UWorld* World = GetWorld();
