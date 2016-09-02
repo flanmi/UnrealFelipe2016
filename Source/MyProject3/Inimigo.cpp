@@ -2,6 +2,7 @@
 
 #include "MyProject3.h"
 #include "Inimigo.h"
+#include "MyCharacter.h"
 
 
 // Sets default values
@@ -13,6 +14,10 @@ AInimigo::AInimigo()
 
 
 	Root = CreateDefaultSubobject<USphereComponent>(TEXT("Root"));
+	
+	Root->SetCollisionProfileName("OnHit");
+	//Root->SetWorldScale3D(FVector(1.0f, 1.0f, 1.0f));
+	Root->OnComponentHit.AddDynamic(this, &AInimigo::OnHit);
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject <UStaticMeshComponent>(TEXT("MeshComp"));
@@ -24,7 +29,7 @@ AInimigo::AInimigo()
 	}
 
 	MeshComp->SetWorldLocation(FVector(.0f, 0.0f, -30.0f));
-	MeshComp->SetWorldScale3D(FVector(1.0f, 1.0f, 1.0f));
+	MeshComp->SetWorldScale3D(FVector(0.9f, 0.9f, 0.9f));
 	MeshComp->AttachTo(RootComponent);
 
 
@@ -75,3 +80,15 @@ void AInimigo::Tick( float DeltaTime )
 
 }
 
+void AInimigo::OnHit(UPrimitiveComponent* HitComponent, AActor*OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
+	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr)
+		&& (OtherActor->IsA(AMyCharacter::StaticClass()))) {
+
+		AMyCharacter* MyCharacter = Cast<AMyCharacter>(OtherActor);
+		MyCharacter->SetLife(MyCharacter->GetLife() - DamageAmount);
+		MyCharacter->OnDeath();
+		UE_LOG(LogTemp, Warning, TEXT("Life = %d"), MyCharacter->GetLife());
+		Destroy();
+
+	}
+}

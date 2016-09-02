@@ -6,6 +6,7 @@
 #include "Engine/Canvas.h"
 #include "Kismet/GameplayStatics.h"
 #include "MyCharacter.h"
+#include "Boss.h"
 
 AMyHUD2::AMyHUD2() {
 	static ConstructorHelpers::FObjectFinder<UFont>Font(TEXT("Font'/Engine/EngineFonts/RobotoDistanceField.RobotoDistanceField'"));
@@ -13,17 +14,17 @@ AMyHUD2::AMyHUD2() {
 		HUDFont = Font.Object;
 	}
 
-	static ConstructorHelpers::FObjectFinder<UTexture2D>Texture(TEXT("Texture2D'/Game/Texturas/botao.botao'"));
-		if (Texture.Succeeded()) {
-			MyTexture = Texture.Object;
-		}
+	//static ConstructorHelpers::FObjectFinder<UTexture2D>Texture(TEXT("Texture2D'/Game/Texturas/botao.botao'"));
+	//	if (Texture.Succeeded()) {
+	//		MyTexture = Texture.Object;
+	//	}
 }
 
 void AMyHUD2::DrawHUD() {
 	Super::DrawHUD();
 
 
-	FVector2D ScreenDimensions = FVector2D(Canvas->SizeX, Canvas->SizeY); 
+	FVector2D ScreenDimensions = FVector2D(Canvas->SizeX, Canvas->SizeY);
 
 	AMyCharacter* MyCharacter = Cast<AMyCharacter>(UGameplayStatics::GetPlayerPawn(this, 0));
 
@@ -34,10 +35,30 @@ void AMyHUD2::DrawHUD() {
 
 	//DrawTextureSimple(MyTexture, 200, 50, 1.0f, false);
 
-	DrawTexture(MyTexture, 200, 50, MyCharacter->GetLife()*4, MyTexture->GetSizeY(), 200, 50, MyCharacter->GetLife()*4, MyTexture->GetSizeY(),
-		FLinearColor::White, EBlendMode::BLEND_Translucent, 1.0f, false, 0.0f, FVector2D::ZeroVector);
-
-
+	//DrawTexture(MyTexture, 200, 50, MyCharacter->GetLife()*4, MyTexture->GetSizeY(), 200, 50, MyCharacter->GetLife()*4, MyTexture->GetSizeY(),
+	//	FLinearColor::White, EBlendMode::BLEND_Translucent, 1.0f, false, 0.0f, FVector2D::ZeroVector);
+	
+		
+	
+	//checar
+	ABoss* Boss = Cast<ABoss>(UGameplayStatics::GetPlayerPawn(this, 0));
+		if (Boss != nullptr) {
+		FString LifeString2 = FString::Printf(TEXT("Boss Life: %d"), Boss->GetBossLife());
+		DrawText(LifeString2, FColor::Red, 70, 50, HUDFont);
+		}
 }
 
 
+
+
+
+
+	
+
+
+	
+
+	
+
+
+	

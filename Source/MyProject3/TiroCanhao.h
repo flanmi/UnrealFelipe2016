@@ -3,16 +3,16 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "Inimigo.generated.h"
+#include "TiroCanhao.generated.h"
 
 UCLASS()
-class MYPROJECT3_API AInimigo : public AActor
+class MYPROJECT3_API ATiroCanhao : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AInimigo();
+	ATiroCanhao();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -22,20 +22,13 @@ public:
 
 private:
 
-	USphereComponent* Root;
+	UBoxComponent* Root;
 	UStaticMeshComponent* MeshComp;
+	UProjectileMovementComponent* ProjectileMovement;
 
 
-	UPROPERTY(VisibleAnywhere, Category = Tick)
-		float RunningTime;
+	float DefaultZ;
 
-	float ContadorDistancia = 0.0f;
+
 	
-	UPROPERTY(EditAnywhere)
-		float DamageAmount = 1;
-
-	UFUNCTION()
-		void OnHit(UPrimitiveComponent* HitComponent, AActor*OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
-
-
 };

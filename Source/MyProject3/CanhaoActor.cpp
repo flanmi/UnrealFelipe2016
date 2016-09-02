@@ -2,7 +2,7 @@
 
 #include "MyProject3.h"
 #include "CanhaoActor.h"
-#include "ProjectyleActor.h"
+#include "TiroCanhao.h"
 
 
 // Sets default values
@@ -23,7 +23,7 @@ ACanhaoActor::ACanhaoActor()
 
 	}
 
-	MeshComp->SetWorldLocation(FVector(.0f, 0.0f, -30.0f));
+	MeshComp->SetWorldLocation(FVector(.0f, 0.0f, 0.0f));
 	MeshComp->SetWorldScale3D(FVector(2.0f, 0.6f, 0.6f));
 	MeshComp->AttachTo(RootComponent);
 
@@ -61,7 +61,7 @@ void ACanhaoActor::DropProjectile() {
 	UWorld* World = GetWorld();
 	if (World != nullptr) {
 		FRotator Rotation = MeshComp->GetComponentRotation();
-		AProjectyleActor* Proj = World->SpawnActor<AProjectyleActor>(GetActorLocation(), Rotation, SpawnParameters);
+		ATiroCanhao* Proj = World->SpawnActor<ATiroCanhao>(GetActorLocation(), Rotation, SpawnParameters);
 		if (Proj != nullptr) {
 			//UE_LOG(LogTemp, Warning, TEXT("Spawn OK!"));
 		}

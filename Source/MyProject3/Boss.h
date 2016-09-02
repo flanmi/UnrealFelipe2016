@@ -3,16 +3,16 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "Inimigo.generated.h"
+#include "Boss.generated.h"
 
 UCLASS()
-class MYPROJECT3_API AInimigo : public AActor
+class MYPROJECT3_API ABoss : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AInimigo();
+	ABoss();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -20,22 +20,32 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
+
+
+
+	void SetBossLife(int NewBossLife);
+	int GetBossLife();
+	void BossDerrotado();
+
+
+
 private:
 
-	USphereComponent* Root;
+	UBoxComponent* Root;
 	UStaticMeshComponent* MeshComp;
 
 
 	UPROPERTY(VisibleAnywhere, Category = Tick)
 		float RunningTime;
 
-	float ContadorDistancia = 0.0f;
-	
+
 	UPROPERTY(EditAnywhere)
-		float DamageAmount = 1;
-
-	UFUNCTION()
-		void OnHit(UPrimitiveComponent* HitComponent, AActor*OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+		int BossLife = 20;
 
 
+	float ContadorDistancia = 0.0f;
+
+	void DropProjectile();
+
+	float ContadorTiro = 0.0f;
 };

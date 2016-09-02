@@ -3,16 +3,16 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "Inimigo.generated.h"
+#include "BombaBoss.generated.h"
 
 UCLASS()
-class MYPROJECT3_API AInimigo : public AActor
+class MYPROJECT3_API ABombaBoss : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AInimigo();
+	ABombaBoss();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -20,22 +20,27 @@ public:
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
 
+
+
+
+
 private:
 
 	USphereComponent* Root;
 	UStaticMeshComponent* MeshComp;
+	UProjectileMovementComponent* ProjectileMovement;
 
 
-	UPROPERTY(VisibleAnywhere, Category = Tick)
-		float RunningTime;
-
-	float ContadorDistancia = 0.0f;
-	
-	UPROPERTY(EditAnywhere)
-		float DamageAmount = 1;
+	float DefaultZ;
 
 	UFUNCTION()
-		void OnHit(UPrimitiveComponent* HitComponent, AActor*OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
+	
+	UPROPERTY(EditAnywhere)
+		float Explodir = 0;
+	UPROPERTY(EditAnywhere)
+		float DamageAmount = 3;
 
+	
 };
