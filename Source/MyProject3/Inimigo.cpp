@@ -142,7 +142,7 @@ void AInimigo::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* Other
 		
 		
 		AProjectyleActor* ProjectyleActor = Cast<AProjectyleActor>(OtherActor);
-		UE_LOG(LogTemp, Warning, TEXT("OverlapBegin"));
+		UE_LOG(LogTemp, Warning, TEXT("TIRO TIRO"));
 		Die();
 			
 

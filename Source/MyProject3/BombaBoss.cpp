@@ -8,7 +8,7 @@
 // Sets default values
 ABombaBoss::ABombaBoss()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	Root = CreateDefaultSubobject<USphereComponent>(TEXT("Root"));
@@ -28,6 +28,7 @@ ABombaBoss::ABombaBoss()
 	MeshComp->SetWorldScale3D(FVector(0.09f, 0.09f, 0.09f));
 	MeshComp->AttachTo(RootComponent);
 
+	
 	InitialLifeSpan = 2.0f;
 	// ^^^^
 }
@@ -46,21 +47,28 @@ void ABombaBoss::Tick( float DeltaTime )
 
 
 
-	
-	Explodir++;
-
+	Explodir+= 0.1f;
 }
+
+
+void ABombaBoss::SetExplodir(int NewExplodir) {
+	Explodir = NewExplodir;
+}
+int ABombaBoss::GetExplodir() {
+	return Explodir;
+}
+
 
 void ABombaBoss::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherActor->IsA(AMyCharacter::StaticClass())) && (OtherComp != nullptr)){
 
 		UE_LOG(LogTemp, Warning, TEXT("OverlapBegin"));
-		if (InitialLifeSpan == 2.0f) {
-			///if( acabar lifespawn)
+		if (Explodir >= 2.0f) {
+			
 			AMyCharacter* MyCharacter = Cast<AMyCharacter>(OtherActor);
 			MyCharacter->SetLife(MyCharacter->GetLife() - DamageAmount);
 			MyCharacter->OnDeath();
-			UE_LOG(LogTemp, Warning, TEXT("Life = %d"), MyCharacter->GetLife());
+			
 			
 		}
 

@@ -21,7 +21,8 @@ public:
 	virtual void Tick( float DeltaSeconds ) override;
 
 
-
+	void SetExplodir(int NewExplodir);
+	int GetExplodir();
 
 
 private:
@@ -38,9 +39,9 @@ private:
 
 	
 	UPROPERTY(EditAnywhere)
-		float Explodir = 0;
+		float Explodir = 0.0f;
 	UPROPERTY(EditAnywhere)
 		float DamageAmount = 3;
-
+	
 	
 };
