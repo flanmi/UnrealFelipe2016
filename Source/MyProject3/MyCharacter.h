@@ -46,7 +46,7 @@ private:
 	UPROPERTY(EditAnywhere)
 		USpringArmComponent* CameraBoom;
 	UPROPERTY(EditAnywhere)
-		int Life = 100;
+		int Life = 3;
 	UPROPERTY(EditAnywhere)
 		UArrowComponent* ArrowComp;
 

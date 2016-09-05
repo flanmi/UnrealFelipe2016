@@ -25,6 +25,7 @@ ABoss::ABoss()
 	MeshComp->SetWorldLocation(FVector(.0f, 0.0f, -30.0f));
 	MeshComp->SetWorldScale3D(FVector(1.0f, 1.0f, 1.0f));
 	MeshComp->AttachTo(RootComponent);
+
 }
 
 // Called when the game starts or when spawned

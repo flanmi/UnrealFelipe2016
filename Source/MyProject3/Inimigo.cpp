@@ -3,6 +3,7 @@
 #include "MyProject3.h"
 #include "Inimigo.h"
 #include "MyCharacter.h"
+#include "ProjectyleActor.h"
 
 
 // Sets default values
@@ -15,9 +16,14 @@ AInimigo::AInimigo()
 
 	Root = CreateDefaultSubobject<USphereComponent>(TEXT("Root"));
 	
-	Root->SetCollisionProfileName("OnHit");
-	//Root->SetWorldScale3D(FVector(1.0f, 1.0f, 1.0f));
-	Root->OnComponentHit.AddDynamic(this, &AInimigo::OnHit);
+	//Root->SetCollisionProfileName("BlockAll");
+	//Root->OnComponentHit.AddDynamic(this, &AInimigo::OnHit);
+
+	Root->bGenerateOverlapEvents = true;
+	Root->SetCollisionProfileName("OverlapAllDynamic");
+	Root->OnComponentBeginOverlap.AddDynamic(this, &AInimigo::OnOverlapBegin);
+
+
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject <UStaticMeshComponent>(TEXT("MeshComp"));
@@ -25,9 +31,8 @@ AInimigo::AInimigo()
 		Mesh(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Sphere.Shape_Sphere'"));
 	if (Mesh.Succeeded()) {
 		MeshComp->SetStaticMesh(Mesh.Object);
-
 	}
-
+	MeshComp->SetCollisionProfileName("NoCollision");
 	MeshComp->SetWorldLocation(FVector(.0f, 0.0f, -30.0f));
 	MeshComp->SetWorldScale3D(FVector(0.9f, 0.9f, 0.9f));
 	MeshComp->AttachTo(RootComponent);
@@ -79,16 +84,70 @@ void AInimigo::Tick( float DeltaTime )
 
 
 }
+void AInimigo::SetLife(int NewLife) {
+	Life = NewLife;
+}
+int AInimigo::GetLife() {
+	return Life;
+}
 
-void AInimigo::OnHit(UPrimitiveComponent* HitComponent, AActor*OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
-	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr)
-		&& (OtherActor->IsA(AMyCharacter::StaticClass()))) {
 
+void AInimigo::Die() {
+	
+		Destroy();
+	
+}
+
+
+
+
+//void AInimigo::OnHit(UPrimitiveComponent* HitComponent, AActor*OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
+	
+//	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr))
+		//{
+//		UE_LOG(LogTemp, Warning, TEXT("HIT"));
+//		AMyCharacter* MyCharacter = Cast<AMyCharacter>(OtherActor);
+//		MyCharacter->SetLife(MyCharacter->GetLife() - DamageAmount);
+//		MyCharacter->OnDeath();
+//		UE_LOG(LogTemp, Warning, TEXT("Life = %d"), MyCharacter->GetLife());
+		
+
+	//}
+//
+
+
+	
+
+//}
+
+
+void AInimigo::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) {
+	
+	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherActor->IsA(AMyCharacter::StaticClass())) && (OtherComp != nullptr))
+	{
+		UE_LOG(LogTemp, Warning, TEXT("HIT"));
 		AMyCharacter* MyCharacter = Cast<AMyCharacter>(OtherActor);
 		MyCharacter->SetLife(MyCharacter->GetLife() - DamageAmount);
 		MyCharacter->OnDeath();
 		UE_LOG(LogTemp, Warning, TEXT("Life = %d"), MyCharacter->GetLife());
-		Destroy();
+
 
 	}
+
+	
+	
+	
+	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherActor->IsA(AProjectyleActor::StaticClass())) && (OtherComp != nullptr)) {
+
+		
+		
+		AProjectyleActor* ProjectyleActor = Cast<AProjectyleActor>(OtherActor);
+		UE_LOG(LogTemp, Warning, TEXT("OverlapBegin"));
+		Die();
+			
+
+		}
+
+
+	
 }

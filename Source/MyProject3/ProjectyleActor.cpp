@@ -13,6 +13,7 @@ AProjectyleActor::AProjectyleActor()
 
 	Root = CreateDefaultSubobject<UBoxComponent>(TEXT("Root"));
 	Root->SetWorldScale3D(FVector(0.5f, 0.5f, 0.5f));
+
 	RootComponent = Root;
 
 	MeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComp"));
@@ -66,6 +67,3 @@ void AProjectyleActor::Tick( float DeltaTime )
 	SetActorLocation(Location);
 
 }
-
-
-

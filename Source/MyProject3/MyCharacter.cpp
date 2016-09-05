@@ -75,11 +75,18 @@ void AMyCharacter::SetupPlayerInputComponent(class UInputComponent* InputCompone
 
 void AMyCharacter::MoveForward(float Value) {
 	FVector Forward(0, 1, 0);
+	
 	AddMovementInput(Forward, Value);
+	
 }
 void AMyCharacter::MoveRight(float Value) {
 	FVector Right(1, 0, 0);
 	AddMovementInput(Right, Value);
+	//AddControllerYawInput(-Value);
+
+
+
+
 }
 
 void AMyCharacter::StartRun() {
@@ -99,8 +106,8 @@ int AMyCharacter::GetLife() {
 
 void AMyCharacter::OnDeath() {
 	if (Life <= 0) {
-		FVector InitialLocation(-1360.0f, -600.0f, 48.0f);
-		Life = 100;
+		FVector InitialLocation(60.0f, -410.0f, 108.0f);
+		Life = 3;
 		SetActorLocation(InitialLocation);
 
 	}
@@ -150,8 +157,9 @@ void AMyCharacter::DropProjectile() {
 }
 
 void AMyCharacter::Turn(float Value) {
-	//AddControllerYawInput(Value);
+	//AddControllerYawInput(90.0f);
+	
 	FRotator NewRotation = MeshComp->GetComponentRotation();
-	NewRotation.Yaw += Value;
+	NewRotation.Yaw += Value ;
 	MeshComp->SetWorldRotation(NewRotation);
 }

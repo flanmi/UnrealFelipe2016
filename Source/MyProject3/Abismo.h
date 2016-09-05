@@ -3,16 +3,16 @@
 #pragma once
 
 #include "GameFramework/Actor.h"
-#include "ProjectyleActor.generated.h"
+#include "Abismo.generated.h"
 
 UCLASS()
-class MYPROJECT3_API AProjectyleActor : public AActor
+class MYPROJECT3_API AAbismo : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
 	// Sets default values for this actor's properties
-	AProjectyleActor();
+	AAbismo();
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -22,18 +22,18 @@ public:
 
 	
 	
+
 private:
-
-	UBoxComponent* Root;
-	UStaticMeshComponent* MeshComp;
-	//UParticleSystemComponent* Particle;
-	UProjectileMovementComponent* ProjectileMovement;
-
-
-	float DefaultZ;
-
 	UPROPERTY(EditAnywhere)
-		float DamageAmount = 1;
+		UShapeComponent* Root;
+	UPROPERTY(EditAnywhere)
+		UStaticMeshComponent* MeshComp;
 
-	
+
+	UFUNCTION()
+		void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+
+
+
 };
