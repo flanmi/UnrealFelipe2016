@@ -6,8 +6,8 @@ public class MyProject3 : ModuleRules
 {
 	public MyProject3(TargetInfo Target)
 	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
-
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" , "AIModule" , "GameplayTasks" });
+                                                                                                    //Adicionado aimodule e gameplaytasks para inteligencia articial
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
 		// Uncomment if you are using Slate UI

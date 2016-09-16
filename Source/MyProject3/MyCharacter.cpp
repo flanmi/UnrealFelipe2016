@@ -158,6 +158,7 @@ void AMyCharacter::DropProjectile() {
 
 void AMyCharacter::Turn(float Value) {
 	//AddControllerYawInput(90.0f);
+	//AddControllerPitchInput(90.0f);
 	
 	FRotator NewRotation = MeshComp->GetComponentRotation();
 	NewRotation.Yaw += Value ;
